@@ -188,7 +188,8 @@ int main(int argc, char** argv) {
     cin >> choice;
     cout << "Testing on " << V << "-vertex graphs for " << TRIALS << " trials." << endl;
     if (choice == 1) { // Dijkstra's Algorithm
-        auto duration = duration_cast<milliseconds>(high_resolution_clock::now() - high_resolution_clock::now());
+        //auto duration = duration_cast<milliseconds>(high_resolution_clock::now() - high_resolution_clock::now());
+        auto start = high_resolution_clock::now();
         for (int t = 0; t < TRIALS; t++){
             // Creating random unweighted Graph and running
             srand (time(NULL));
@@ -215,16 +216,17 @@ int main(int argc, char** argv) {
                 }
                 cout << endl;
             }*/
-            // Timing the execution of Dijkstra's
-            auto start = high_resolution_clock::now(); 
+            // Timing the execution of Dijkstra's 
             dijkstra(graph, 0);
-            auto stop = high_resolution_clock::now();
-            duration += duration_cast<milliseconds>(stop - start);
         }
+        auto stop = high_resolution_clock::now();
+        auto duration = duration_cast<milliseconds>(stop - start);
         cout << "Finished Dijkstra's Algorithm!\n\nTotal Time: " << duration.count() << " ms" << endl;
     } else if (choice == 2) {// Bellman-Ford's Algorithm
         // Creating random weighted Graph and running
-        auto duration = duration_cast<milliseconds>(high_resolution_clock::now() - high_resolution_clock::now());
+        //auto duration = duration_cast<milliseconds>(high_resolution_clock::now() - high_resolution_clock::now());
+        auto start = high_resolution_clock::now();
+        
         for (int t = 0; t < TRIALS; t++){
             srand (time(NULL));
             int edges = rand() % ((V*V)-(2*V)+1); //0
@@ -256,14 +258,15 @@ int main(int argc, char** argv) {
                     edgecounter++;
                 }
             }
-            auto start = high_resolution_clock::now();
             BellmanFord(graph, 0);
-            auto stop = high_resolution_clock::now();
-            duration += duration_cast<milliseconds>(stop - start);
         }
+        auto stop = high_resolution_clock::now();
+        auto duration = duration_cast<milliseconds>(stop - start);
         cout << "Finished Bellman-Ford's Algorithm!\n\nTotal Time: " << duration.count() << " ms" << endl;
     } else if (choice == 3) {// Floyd-Warshall's Algorithm
-        auto duration = duration_cast<milliseconds>(high_resolution_clock::now() - high_resolution_clock::now());
+        //auto duration = duration_cast<milliseconds>(high_resolution_clock::now() - high_resolution_clock::now());
+        auto start = high_resolution_clock::now();
+        
         for (int t = 0; t < TRIALS; t++){
             srand (time(NULL));
             int graph[V][V];
@@ -281,11 +284,10 @@ int main(int argc, char** argv) {
                 }
                 cout << endl;
             }*/
-            auto start = high_resolution_clock::now();
             floydWarshall(graph);
-            auto stop = high_resolution_clock::now();
-            duration += duration_cast<milliseconds>(stop - start);
         }
+        auto stop = high_resolution_clock::now();
+        auto duration = duration_cast<milliseconds>(stop - start);
         cout << "Finished Floyd-Warshall's Algorithm!\n\nTotal Time: " << duration.count() << " ms" << endl;
     }
     return 0;
